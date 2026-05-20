@@ -1,6 +1,12 @@
 <script setup lang="ts">
-import { inject } from 'vue';
+import { inject, type Ref } from 'vue';
 import type { Category } from '../data/emojis';
+
+interface SkinColorItem {
+  id: string;
+  name: string;
+  gradient: string;
+}
 
 defineProps<{
   categories: Category[];
@@ -11,13 +17,8 @@ const emit = defineEmits<{
   select: [categoryId: string | null];
 }>();
 
-const skinColor = inject('skinColor');
-const skinColors = inject('skinColors');
-
-const getSkinGradient = () => {
-  const skin = skinColors.find(c => c.id === skinColor.value);
-  return skin ? skin.gradient.split(' ')[0].replace('from-', '') : 'indigo-500';
-};
+const skinColor = inject<Ref<string>>('skinColor')!;
+const skinColors = inject<SkinColorItem[]>('skinColors')!;
 
 const handleSelect = (categoryId: string | null) => {
   emit('select', categoryId);

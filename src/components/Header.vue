@@ -1,16 +1,23 @@
 <script setup lang="ts">
-import { inject, ref } from 'vue';
+import { inject, ref, type Ref } from 'vue';
 
-const skinColor = inject('skinColor');
-const skinColors = inject('skinColors');
+interface SkinColorItem {
+  id: string;
+  name: string;
+  gradient: string;
+}
+
+const skinColor = inject<Ref<string>>('skinColor')!;
+const skinColors = inject<SkinColorItem[]>('skinColors')!;
 const showColorPicker = ref(false);
 
-const currentSkin = () => {
+const currentSkin = (): SkinColorItem => {
   return skinColors.find(c => c.id === skinColor.value) || skinColors[0];
 };
 
-const selectSkin = (colorId) => {
+const selectSkin = (colorId: string) => {
   skinColor.value = colorId;
+  localStorage.setItem('emoji-skin-color', colorId);
   showColorPicker.value = false;
 };
 

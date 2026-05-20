@@ -4,11 +4,14 @@ import SearchBar from './components/SearchBar.vue';
 import CategoryNav from './components/CategoryNav.vue';
 import EmojiGrid from './components/EmojiGrid.vue';
 import EmojiModal from './components/EmojiModal.vue';
+import CustomCursor from './components/CustomCursor.vue';
 import { categories, searchEmojis, type Emoji } from './data/emojis';
 const searchQuery = ref('');
 const selectedCategory = ref<string | null>(null);
 const selectedEmoji = ref<Emoji | null>(null);
-const skinColor = ref('indigo-purple');
+const savedSkinColor = localStorage.getItem('emoji-skin-color');
+const skinColor = ref(savedSkinColor || 'indigo-purple');
+
 const skinColors = [
  { id: 'indigo-purple', name: '靛紫', gradient: 'from-indigo-500 to-purple-500' },
  { id: 'pink-rose', name: '粉玫', gradient: 'from-pink-500 to-rose-500' },
@@ -60,6 +63,7 @@ const handleCloseModal = () => {
 
 <template>
   <div class="min-h-screen bg-gray-50" :style="{ '--skin-color': skinColorHex, '--skin-color-secondary': skinColorSecondaryHex }">
+    <CustomCursor />
     <Header />
     
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
