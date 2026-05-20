@@ -15,7 +15,7 @@
     "verbatimModuleSyntax": false,
     "moduleDetection": "force",
     "noEmit": true,
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "strict": false,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
@@ -27,10 +27,14 @@
       "@/*": [
         "./src/*"
       ]
-    }
+    },
+    "types": [
+      "vue"
+    ]
   },
   "include": [
-    "src",
-    "api"
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.vue"
   ]
 }
