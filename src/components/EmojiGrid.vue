@@ -5,6 +5,7 @@ import EmojiCard from './EmojiCard.vue';
 
 const props = defineProps<{
   emojis: Emoji[];
+  darkMode: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -49,9 +50,9 @@ const getPageNumbers = () => {
 
 <template>
   <div>
-    <div v-if="emojis.length === 0" class="flex flex-col items-center justify-center py-20 text-gray-500">
-      <span class="text-6xl mb-4">{"🔍"}</span>
-      <p class="text-lg font-medium">没有找到匹配的 Emoji</p>
+    <div v-if="emojis.length === 0" :class="['flex flex-col items-center justify-center py-20', darkMode ? 'text-gray-400' : 'text-gray-500']">
+      <span class="text-6xl mb-4">🔍</span>
+      <p :class="['text-lg font-medium', darkMode ? 'text-gray-300' : 'text-gray-600']">没有找到匹配的 Emoji</p>
       <p class="text-sm mt-2">请尝试使用其他关键词搜索</p>
     </div>
     
@@ -60,6 +61,7 @@ const getPageNumbers = () => {
         v-for="emoji in currentEmojis()"
         :key="emoji.id"
         :emoji="emoji"
+        :dark-mode="darkMode"
         @click="handleEmojiClick"
       />
     </div>
@@ -68,10 +70,14 @@ const getPageNumbers = () => {
       <button
         @click="handlePageChange(currentPage - 1)"
         :disabled="currentPage === 1"
-        class="px-3 py-2 rounded-lg bg-gray-100 text-gray-600 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        :class="[
+          'px-3 py-2 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors',
+          darkMode 
+            ? 'bg-gray-800 text-gray-300 hover:bg-gray-700' 
+            : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+        ]"
       >
-        上一页
-      </button>
+        上一页      </button>
 
       <div class="flex gap-1">
         <template v-for="(page, index) in getPageNumbers()" :key="`page-${index}`">
@@ -82,26 +88,32 @@ const getPageNumbers = () => {
               'min-w-[40px] h-10 rounded-lg transition-colors',
               currentPage === page
                 ? 'text-white'
-                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                : darkMode 
+                  ? 'bg-gray-800 text-gray-300 hover:bg-gray-700' 
+                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
             ]"
             :style="currentPage === page ? { backgroundColor: 'var(--skin-color, #6366f1)' } : {}"
           >
             {{ page }}
           </button>
-          <span v-else class="px-2 py-2 text-gray-400">...</span>
+          <span :class="['px-2 py-2', darkMode ? 'text-gray-500' : 'text-gray-400']">...</span>
         </template>
       </div>
 
       <button
         @click="handlePageChange(currentPage + 1)"
         :disabled="currentPage === totalPages()"
-        class="px-3 py-2 rounded-lg bg-gray-100 text-gray-600 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        :class="[
+          'px-3 py-2 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors',
+          darkMode 
+            ? 'bg-gray-800 text-gray-300 hover:bg-gray-700' 
+            : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+        ]"
       >
-        下一页
-      </button>
+        下一页      </button>
     </div>
 
-    <div v-if="emojis.length > 0" class="text-center text-sm text-gray-500 mb-4">
+    <div v-if="emojis.length > 0" :class="['text-center text-sm mb-4', darkMode ? 'text-gray-500' : 'text-gray-500']">
       显示 {{ startIndex() + 1 }}-{{ Math.min(startIndex() + ITEMS_PER_PAGE, emojis.length) }}，共 {{ emojis.length }} 个 Emoji
     </div>
   </div>

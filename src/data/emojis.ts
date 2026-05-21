@@ -324,22 +324,22 @@ export const categories: Category[] = [
       { id: "240", name: "乘号", emoji: "\u{2715}", unicode: "U+2715", tags: ["multiply", "times", "symbol"] },
     ]
   },
-];
+]
 
 export const getAllEmojis = (): Emoji[] => {
-  return categories.flatMap(category => category.emojis);
-};
+  return categories.flatMap(category => category.emojis)
+}
 
 export const searchEmojis = (query: string): Emoji[] => {
-  const lowerQuery = query.toLowerCase().trim();
-  if (!lowerQuery) return getAllEmojis();
+  const lowerQuery = query.toLowerCase().trim()
+  if (!lowerQuery) return getAllEmojis()
   
   return getAllEmojis().filter(emoji => 
     emoji.name.toLowerCase().includes(lowerQuery) ||
     emoji.tags.some(tag => tag.toLowerCase().includes(lowerQuery))
-  );
-};
+  )
+}
 
 export const getCategoryById = (id: string): Category | undefined => {
-  return categories.find(category => category.id === id);
-};
+  return categories.find(category => category.id === id)
+}
