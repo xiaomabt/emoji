@@ -1,26 +1,26 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { Search } from 'lucide-vue-next';
+import { ref } from 'vue'
+import { Search } from 'lucide-vue-next'
 
 defineProps<{
-  darkMode: boolean;
-}>();
+  darkMode: boolean
+}>()
 
 const emit = defineEmits<{
-  search: [query: string];
-}>();
+  search: [query: string]
+}>()
 
-const inputValue = ref('');
+const inputValue = ref('')
 
 const handleSearch = () => {
-  emit('search', inputValue.value);
-};
+  emit('search', inputValue.value)
+}
 
 const handleKeydown = (e: KeyboardEvent) => {
   if (e.key === 'Enter') {
-    handleSearch();
+    handleSearch()
   }
-};
+}
 </script>
 
 <template>
