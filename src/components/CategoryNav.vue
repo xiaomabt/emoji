@@ -11,6 +11,7 @@ interface SkinColorItem {
 defineProps<{
   categories: Category[];
   selectedCategory: string | null;
+  darkMode: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -33,7 +34,9 @@ const handleSelect = (categoryId: string | null) => {
         'px-4 py-2 rounded-full text-sm font-medium transition-all duration-200',
         selectedCategory === null
           ? 'text-white shadow-md'
-          : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
+          : darkMode 
+            ? 'bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-700' 
+            : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
       ]"
       :style="selectedCategory === null ? { backgroundColor: `var(--skin-color, #6366f1)` } : {}"
     >
@@ -48,7 +51,9 @@ const handleSelect = (categoryId: string | null) => {
         'px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 flex items-center gap-2',
         selectedCategory === category.id
           ? 'text-white shadow-md'
-          : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
+          : darkMode 
+            ? 'bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-700' 
+            : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
       ]"
       :style="selectedCategory === category.id ? { backgroundColor: `var(--skin-color, #6366f1)` } : {}"
     >
