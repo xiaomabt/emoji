@@ -1,70 +1,70 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { X, Download, Copy, Check, Heart } from 'lucide-vue-next';
-import type { Emoji } from '../data/emojis';
-import { downloadEmoji } from '../utils/download';
+import { ref } from 'vue'
+import { X, Download, Copy, Check, Heart } from 'lucide-vue-next'
+import type { Emoji } from '../data/emojis'
+import { downloadEmoji } from '../utils/download'
 
 interface User {
-  id: string;
-  username: string;
-  email: string;
-  avatar: string;
+  id: string
+  username: string
+  email: string
+  avatar: string
 }
 
 const props = defineProps<{
-  emoji: Emoji;
-  darkMode: boolean;
-  isFavorite: boolean;
-  currentUser: User | null;
-}>();
+  emoji: Emoji
+  darkMode: boolean
+  isFavorite: boolean
+  currentUser: User | null
+}>()
 
 const emit = defineEmits<{
-  close: [];
-  'toggle-favorite': [];
-}>();
+  close: []
+  'toggle-favorite': []
+}>()
 
-const SIZE_OPTIONS = [64, 128, 256, 512];
+const SIZE_OPTIONS = [64, 128, 256, 512]
 
-const format = ref('png');
-const size = ref(128);
-const copied = ref(false);
-const downloading = ref(false);
-const copyFormat = ref('emoji');
+const format = ref('png')
+const size = ref(128)
+const copied = ref(false)
+const downloading = ref(false)
+const copyFormat = ref('emoji')
 
 const copyFormats = [
   { id: 'emoji', name: 'Emoji', getValue: (e: Emoji) => e.emoji },
   { id: 'unicode', name: 'Unicode', getValue: (e: Emoji) => e.unicode },
   { id: 'html', name: 'HTML', getValue: (e: Emoji) => `&#x${e.unicode.replace('U+', '')};` },
-  { id: 'css', name: 'CSS', getValue: (e: Emoji) => `\\${e.unicode.replace('U+', '')}` },
-];
+  { id: 'css', name: 'CSS', getValue: (e: Emoji) => `\\${e.unicode.replace('U+', '')}` }
+]
 
 const handleCopy = () => {
-  const format = copyFormats.find(f => f.id === copyFormat.value);
+  const format = copyFormats.find(f => f.id === copyFormat.value)
   if (format) {
-    navigator.clipboard.writeText(format.getValue(props.emoji));
-    copied.value = true;
-    setTimeout(() => { copied.value = false; }, 2000);
+    navigator.clipboard.writeText(format.getValue(props.emoji))
+    copied.value = true
+    setTimeout(() => { copied.value = false }, 2000)
   }
-};
+}
 
 const handleDownload = async () => {
-  downloading.value = true;
+  downloading.value = true
   try {
-    await downloadEmoji(props.emoji.emoji, props.emoji.name, { format: format.value, size: size.value });
+    await downloadEmoji(props.emoji.emoji, props.emoji.name, { format: format.value, size: size.value })
   } catch (error) {
-    console.error('下载失败:', error);
+    console.error('下载失败:', error)
   } finally {
-    downloading.value = false;
+    downloading.value = false
   }
-};
+}
 
 const handleClose = () => {
-  emit('close');
-};
+  emit('close')
+}
 
 const handleToggleFavorite = () => {
-  emit('toggle-favorite');
-};
+  emit('toggle-favorite')
+}
 </script>
 
 <template>
@@ -138,7 +138,7 @@ const handleToggleFavorite = () => {
           >
             <template v-if="copied">
               <Check class="w-5 h-5" />
-              已复�?
+              已复�?
             </template>
             <template v-else>
               <Copy class="w-5 h-5" />
@@ -211,7 +211,7 @@ const handleToggleFavorite = () => {
             :style="{ background: 'linear-gradient(to right, var(--skin-color, #6366f1), var(--skin-color-secondary, #8b5cf6))' }"
           >
             <Download :class="['w-5 h-5', downloading ? 'animate-bounce' : '']" />
-            {{ downloading ? '下载�?..' : '下载' }}
+            {{ downloading ? '下载�?..' : '下载' }}
           </button>
         </div>
 

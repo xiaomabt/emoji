@@ -1,51 +1,53 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
-import type { Emoji } from '../data/emojis';
-import EmojiCard from './EmojiCard.vue';
+import { ref, watch } from 'vue'
+import type { Emoji } from '../data/emojis'
+import EmojiCard from './EmojiCard.vue'
 
 const props = defineProps<{
-  emojis: Emoji[];
-  darkMode: boolean;
-}>();
+  emojis: Emoji[]
+  darkMode: boolean
+}>()
 
 const emit = defineEmits<{
-  emojiClick: [emoji: Emoji];
-}>();
+  emojiClick: [emoji: Emoji]
+}>()
 
-const ITEMS_PER_PAGE = 40;
-const currentPage = ref(1);
+const ITEMS_PER_PAGE = 40
+const currentPage = ref(1)
 
 watch(() => props.emojis.length, () => {
-  currentPage.value = 1;
-});
+  currentPage.value = 1
+})
 
-const totalPages = () => Math.ceil(props.emojis.length / ITEMS_PER_PAGE);
-const startIndex = () => (currentPage.value - 1) * ITEMS_PER_PAGE;
-const currentEmojis = () => props.emojis.slice(startIndex(), startIndex() + ITEMS_PER_PAGE);
+const totalPages = () => Math.ceil(props.emojis.length / ITEMS_PER_PAGE)
+const startIndex = () => (currentPage.value - 1) * ITEMS_PER_PAGE
+const currentEmojis = () => props.emojis.slice(startIndex(), startIndex() + ITEMS_PER_PAGE)
 
 const handlePageChange = (page: number) => {
-  currentPage.value = page;
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-};
+  currentPage.value = page
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+}
 
 const handleEmojiClick = (emoji: Emoji) => {
-  emit('emojiClick', emoji);
-};
+  emit('emojiClick', emoji)
+}
 
 const getPageNumbers = () => {
-  const pages: (number | string)[] = [];
-  const total = totalPages();
+  const pages: (number | string)[] = []
+  const total = totalPages()
   
   for (let i = 1; i <= total; i++) {
     if (i === 1 || i === total || (i >= currentPage.value - 1 && i <= currentPage.value + 1)) {
-      pages.push(i);
-    } else if (i === currentPage.value - 2 || i === currentPage.value + 2) {
-      pages.push('...');
+      pages.push(i)
+    } else if (i === currentPage.value - 2 && i > 1) {
+      pages.push('...')
+    } else if (i === currentPage.value + 2 && i < total) {
+      pages.push('...')
     }
   }
   
-  return pages;
-};
+  return pages
+}
 </script>
 
 <template>
@@ -96,7 +98,10 @@ const getPageNumbers = () => {
           >
             {{ page }}
           </button>
-          <span :class="['px-2 py-2', darkMode ? 'text-gray-500' : 'text-gray-400']">...</span>
+          <span
+            v-else
+            :class="['px-2 py-2', darkMode ? 'text-gray-500' : 'text-gray-400']"
+          >...</span>
         </template>
       </div>
 

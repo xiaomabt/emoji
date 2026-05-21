@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import type { Emoji } from '../data/emojis';
+import type { Emoji } from '../data/emojis'
 
 const props = defineProps<{
-  emoji: Emoji;
-  darkMode: boolean;
-}>();
+  emoji: Emoji
+  darkMode: boolean
+}>()
 
 const emit = defineEmits<{
-  click: [emoji: Emoji];
-}>();
+  click: [emoji: Emoji]
+}>()
 
 const handleClick = () => {
-  emit('click', props.emoji);
-};
+  emit('click', props.emoji)
+}
 </script>
 
 <template>
