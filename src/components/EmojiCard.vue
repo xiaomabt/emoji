@@ -3,6 +3,7 @@ import type { Emoji } from '../data/emojis';
 
 const props = defineProps<{
   emoji: Emoji;
+  darkMode: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -17,7 +18,12 @@ const handleClick = () => {
 <template>
   <button
     @click="handleClick"
-    class="group bg-white rounded-xl p-3 flex flex-col items-center justify-center hover:shadow-lg hover:-translate-y-1 transition-all duration-200 border border-gray-100"
+    :class="[
+      'group rounded-xl p-3 flex flex-col items-center justify-center hover:shadow-lg hover:-translate-y-1 transition-all duration-200 border',
+      darkMode 
+        ? 'bg-gray-800 border-gray-700 hover:border-gray-600' 
+        : 'bg-white border-gray-100 hover:border-gray-200'
+    ]"
     :title="emoji.name"
   >
     <span 
@@ -26,6 +32,6 @@ const handleClick = () => {
     >
       {{ emoji.emoji }}
     </span>
-    <span class="text-xs text-gray-500 truncate w-full text-center">{{ emoji.name }}</span>
+    <span :class="['text-xs truncate w-full text-center', darkMode ? 'text-gray-400' : 'text-gray-500']">{{ emoji.name }}</span>
   </button>
 </template>
