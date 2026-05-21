@@ -39,7 +39,9 @@ const getPageNumbers = () => {
   for (let i = 1; i <= total; i++) {
     if (i === 1 || i === total || (i >= currentPage.value - 1 && i <= currentPage.value + 1)) {
       pages.push(i);
-    } else if (i === currentPage.value - 2 || i === currentPage.value + 2) {
+    } else if (i === currentPage.value - 2 && i > 1) {
+      pages.push('...');
+    } else if (i === currentPage.value + 2 && i < total) {
       pages.push('...');
     }
   }
@@ -96,7 +98,10 @@ const getPageNumbers = () => {
           >
             {{ page }}
           </button>
-          <span :class="['px-2 py-2', darkMode ? 'text-gray-500' : 'text-gray-400']">...</span>
+          <span
+            v-else
+            :class="['px-2 py-2', darkMode ? 'text-gray-500' : 'text-gray-400']"
+          >...</span>
         </template>
       </div>
 
