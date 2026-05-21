@@ -77,8 +77,7 @@ const getPageNumbers = () => {
             : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
         ]"
       >
-        上一页
-      </button>
+        上一页      </button>
 
       <div class="flex gap-1">
         <template v-for="(page, index) in getPageNumbers()" :key="`page-${index}`">
@@ -111,8 +110,7 @@ const getPageNumbers = () => {
             : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
         ]"
       >
-        下一页
-      </button>
+        下一页      </button>
     </div>
 
     <div v-if="emojis.length > 0" :class="['text-center text-sm mb-4', darkMode ? 'text-gray-500' : 'text-gray-500']">

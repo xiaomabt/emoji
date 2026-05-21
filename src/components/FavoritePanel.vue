@@ -45,18 +45,17 @@ const handleEmojiClick = (emoji: Emoji) => {
               darkMode ? 'bg-gray-700 hover:bg-gray-600 text-gray-300' : 'bg-gray-100 hover:bg-gray-200 text-gray-500'
             ]"
           >
-            ✕
-          </button>
+            �?          </button>
         </div>
         <p :class="['text-sm mt-1', darkMode ? 'text-gray-400' : 'text-gray-500']">
-          您收藏了 {{ favorites.length }} 个 Emoji
+          您收藏了 {{ favorites.length }} �?Emoji
         </p>
       </div>
       
       <div class="p-6 overflow-y-auto max-h-[60vh]">
         <div v-if="favoriteEmojis.length === 0" :class="['flex flex-col items-center justify-center py-12', darkMode ? 'text-gray-400' : 'text-gray-500']">
           <span class="text-6xl mb-4">💔</span>
-          <p class="text-lg">还没有收藏任何 Emoji</p>
+          <p class="text-lg">还没有收藏任�?Emoji</p>
           <p class="text-sm mt-2">点击 Emoji 详情中的❤️按钮添加收藏</p>
         </div>
         

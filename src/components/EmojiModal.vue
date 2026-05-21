@@ -138,7 +138,7 @@ const handleToggleFavorite = () => {
           >
             <template v-if="copied">
               <Check class="w-5 h-5" />
-              已复制
+              已复�?
             </template>
             <template v-else>
               <Copy class="w-5 h-5" />
@@ -211,7 +211,7 @@ const handleToggleFavorite = () => {
             :style="{ background: 'linear-gradient(to right, var(--skin-color, #6366f1), var(--skin-color-secondary, #8b5cf6))' }"
           >
             <Download :class="['w-5 h-5', downloading ? 'animate-bounce' : '']" />
-            {{ downloading ? '下载中...' : '下载' }}
+            {{ downloading ? '下载�?..' : '下载' }}
           </button>
         </div>
 

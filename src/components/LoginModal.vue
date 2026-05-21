@@ -1,78 +1,102 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { X, Mail, Lock, User, Eye, EyeOff } from 'lucide-vue-next';
-
-defineProps<{
-  darkMode: boolean;
-}>();
+import { ref } from 'vue'
+import { X, Mail, Lock, User, Eye, EyeOff } from 'lucide-vue-next'
 
 interface User {
-  id: string;
-  username: string;
-  email: string;
-  avatar: string;
+  id: string
+  username: string
+  email: string
+  avatar: string
 }
 
-const emit = defineEmits<{
-  close: [];
-  login: [user: User];
-}>();
+defineProps<{
+  darkMode: boolean
+}>()
 
-const email = ref('');
-const password = ref('');
-const username = ref('');
-const showPassword = ref(false);
-const isSignUp = ref(false);
-const loading = ref(false);
+const emit = defineEmits<{
+  close: []
+  login: [user: User]
+}>()
+
+const email = ref('')
+const password = ref('')
+const username = ref('')
+const showPassword = ref(false)
+const isSignUp = ref(false)
+const loading = ref(false)
+const passwordError = ref('')
 
 const sampleUsers = [
   { id: '1', email: 'demo@example.com', password: '123456', username: '演示用户', avatar: '👤' },
-  { id: '2', email: 'test@test.com', password: 'password', username: '测试用户', avatar: '😊' },
-];
+  { id: '2', email: 'test@test.com', password: 'password', username: '测试用户', avatar: '😊' }
+]
+
+const validatePassword = () => {
+  if (!password.value) {
+    passwordError.value = ''
+    return
+  }
+  
+  if (password.value.length < 6) {
+    passwordError.value = '密码至少需要6个字符'
+  } else if (password.value.length < 8) {
+    passwordError.value = '密码强度：弱'
+  } else if (password.value.length < 12) {
+    passwordError.value = '密码强度：中'
+  } else {
+    passwordError.value = '密码强度：强'
+  }
+}
 
 const handleSubmit = async () => {
   if (!email.value || !password.value) {
-    alert('请填写邮箱和密码');
-    return;
+    alert('请填写邮箱和密码')
+    return
   }
-
-  loading.value = true;
-  
-  await new Promise(resolve => setTimeout(resolve, 1000));
 
   if (isSignUp.value) {
     if (!username.value) {
-      alert('请填写用户名');
-      loading.value = false;
-      return;
+      alert('请填写用户名')
+      return
     }
     
+    if (password.value.length < 6) {
+      alert('密码至少需要6个字符')
+      return
+    }
+  }
+
+  loading.value = true
+  
+  await new Promise(resolve => setTimeout(resolve, 1000))
+
+  if (isSignUp.value) {
     const newUser: User = {
       id: Date.now().toString(),
       username: username.value,
       email: email.value,
       avatar: ['👤', '😊', '🤩', '🥳', '🌟', '💫'][Math.floor(Math.random() * 6)]
-    };
-    emit('login', newUser);
+    }
+    emit('login', newUser)
   } else {
-    const found = sampleUsers.find(u => u.email === email.value && u.password === password.value);
+    const found = sampleUsers.find(u => u.email === email.value && u.password === password.value)
     if (found) {
-      emit('login', found);
+      emit('login', found)
     } else {
-      alert('邮箱或密码错误\n\n演示账户：\n邮箱: demo@example.com\n密码: 123456');
+      alert('邮箱或密码错误\n\n演示账户：\n邮箱: demo@example.com\n密码: 123456')
     }
   }
   
-  loading.value = false;
-};
+  loading.value = false
+}
 
 const handleClose = () => {
-  emit('close');
-};
+  emit('close')
+}
 
 const togglePassword = () => {
-  showPassword.value = !showPassword.value;
-};
+  showPassword.value = !showPassword.value
+}
 </script>
 
 <template>
@@ -148,6 +172,7 @@ const togglePassword = () => {
           <div>
             <label :class="['block text-sm font-medium mb-2', darkMode ? 'text-gray-300' : 'text-gray-700']">
               密码
+              <span v-if="isSignUp" :class="['text-xs ml-2', darkMode ? 'text-gray-500' : 'text-gray-400']">（至少6个字符）</span>
             </label>
             <div :class="['relative', darkMode ? 'text-gray-300' : 'text-gray-700']">
               <Lock class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5" />
@@ -157,10 +182,13 @@ const togglePassword = () => {
                 placeholder="输入密码"
                 :class="[
                   'w-full pl-10 pr-12 py-3 rounded-xl border transition-all',
-                  darkMode 
-                    ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-500 focus:border-indigo-500' 
-                    : 'bg-white border-gray-200 text-gray-800 placeholder-gray-400 focus:border-indigo-500'
+                  passwordError && passwordError.includes('至少') 
+                    ? 'border-red-500' 
+                    : darkMode 
+                      ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-500 focus:border-indigo-500' 
+                      : 'bg-white border-gray-200 text-gray-800 placeholder-gray-400 focus:border-indigo-500'
                 ]"
+                @input="validatePassword"
               />
               <button
                 type="button"
@@ -171,6 +199,17 @@ const togglePassword = () => {
                 <EyeOff v-else class="w-5 h-5" />
               </button>
             </div>
+            <p 
+              v-if="passwordError"
+              :class="[
+                'mt-2 text-xs',
+                passwordError.includes('至少') ? 'text-red-500' : 
+                passwordError.includes('弱') ? 'text-yellow-500' : 
+                passwordError.includes('中') ? 'text-blue-500' : 'text-green-500'
+              ]"
+            >
+              {{ passwordError }}
+            </p>
           </div>
 
           <button
