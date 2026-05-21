@@ -42,7 +42,7 @@ export const categories: Category[] = [
       { id: "21", name: "疲惫", emoji: "\u{1F62B}", unicode: "U+1F62B", tags: ["tired", "exhausted", "face"] },
       { id: "22", name: "愤怒", emoji: "\u{1F621}", unicode: "U+1F621", tags: ["angry", "rage", "face"] },
       { id: "23", name: "骷髅", emoji: "\u{1F480}", unicode: "U+1F480", tags: ["skull", "death", "spooky"] },
-      { id: "24", name: "僵尸", emoji: "\u{1F9DF}", unicode: "U+1F9DF", tags: ["zombie", "monster", "scary"] },
+      { id: "24", name: "僵尸", emoji: "\u{1F9DF}", unicode: "U+1F9DF", tags: ["zombie", "monster", "scary"] }
     ]
   },
   {
@@ -73,7 +73,7 @@ export const categories: Category[] = [
       { id: "45", name: "手掌向下", emoji: "\u{1F50A}", unicode: "U+1F50A", tags: ["palm down", "stop", "halt"] },
       { id: "46", name: "手掌向上", emoji: "\u{1F50B}", unicode: "U+1F50B", tags: ["palm up", "receive", "ask"] },
       { id: "47", name: "五指张开", emoji: "\u{1F50C}", unicode: "U+1F50C", tags: ["open hand", "five", "stop"] },
-      { id: "48", name: "拇指向下", emoji: "\u{1F44E}", unicode: "U+1F44E", tags: ["thumbs down", "dislike", "bad"] },
+      { id: "48", name: "拇指向下", emoji: "\u{1F44E}", unicode: "U+1F44E", tags: ["thumbs down", "dislike", "bad"] }
     ]
   },
   {
@@ -104,7 +104,7 @@ export const categories: Category[] = [
       { id: "69", name: "老鹰", emoji: "\u{1F985}", unicode: "U+1F985", tags: ["eagle", "bird", "predator"] },
       { id: "70", name: "猫头鹰", emoji: "\u{1F989}", unicode: "U+1F989", tags: ["owl", "bird", "night"] },
       { id: "71", name: "孔雀", emoji: "\u{1F985}", unicode: "U+1F985", tags: ["peacock", "bird", "beautiful"] },
-      { id: "72", name: "龙", emoji: "\u{1F409}", unicode: "U+1F409", tags: ["dragon", "mythical", "fantasy"] },
+      { id: "72", name: "龙", emoji: "\u{1F409}", unicode: "U+1F409", tags: ["dragon", "mythical", "fantasy"] }
     ]
   },
   {
@@ -135,7 +135,7 @@ export const categories: Category[] = [
       { id: "93", name: "菠萝", emoji: "\u{1F34D}", unicode: "U+1F34D", tags: ["pineapple", "fruit", "tropical"] },
       { id: "94", name: "椰子", emoji: "\u{1F33C}", unicode: "U+1F33C", tags: ["coconut", "fruit", "tropical"] },
       { id: "95", name: "寿司", emoji: "\u{1F363}", unicode: "U+1F363", tags: ["sushi", "food", "japanese"] },
-      { id: "96", name: "面条", emoji: "\u{1F35C}", unicode: "U+1F35C", tags: ["noodles", "food", "asian"] },
+      { id: "96", name: "面条", emoji: "\u{1F35C}", unicode: "U+1F35C", tags: ["noodles", "food", "asian"] }
     ]
   },
   {
@@ -166,7 +166,7 @@ export const categories: Category[] = [
       { id: "117", name: "海滩", emoji: "\u{1F3DD}", unicode: "U+1F3DD", tags: ["beach", "nature", "ocean"] },
       { id: "118", name: "贝壳", emoji: "\u{1F41A}", unicode: "U+1F41A", tags: ["shell", "nature", "ocean"] },
       { id: "119", name: "蝴蝶", emoji: "\u{1F98B}", unicode: "U+1F98B", tags: ["butterfly", "insect", "nature"] },
-      { id: "120", name: "蜜蜂", emoji: "\u{1F41D}", unicode: "U+1F41D", tags: ["bee", "insect", "nature"] },
+      { id: "120", name: "蜜蜂", emoji: "\u{1F41D}", unicode: "U+1F41D", tags: ["bee", "insect", "nature"] }
     ]
   },
   {
@@ -197,7 +197,7 @@ export const categories: Category[] = [
       { id: "141", name: "帐篷", emoji: "\u{26FA}", unicode: "U+26FA", tags: ["tent", "camping", "travel"] },
       { id: "142", name: "背包", emoji: "\u{1F392}", unicode: "U+1F392", tags: ["backpack", "travel", "hiking"] },
       { id: "143", name: "护照", emoji: "\u{1F9FE}", unicode: "U+1F9FE", tags: ["passport", "travel", "document"] },
-      { id: "144", name: "机票", emoji: "\u{1F4DD}", unicode: "U+1F4DD", tags: ["ticket", "travel", "plane"] },
+      { id: "144", name: "机票", emoji: "\u{1F4DD}", unicode: "U+1F4DD", tags: ["ticket", "travel", "plane"] }
     ]
   },
   {
@@ -228,7 +228,7 @@ export const categories: Category[] = [
       { id: "165", name: "蝴蝶结", emoji: "\u{1F380}", unicode: "U+1F380", tags: ["bow", "gift", "celebration"] },
       { id: "166", name: "花环", emoji: "\u{1F39C}", unicode: "U+1F39C", tags: ["wreath", "celebration", "holiday"] },
       { id: "167", name: "奖牌", emoji: "\u{1F948}", unicode: "U+1F948", tags: ["silver medal", "award", "second"] },
-      { id: "168", name: "铜牌", emoji: "\u{1F949}", unicode: "U+1F949", tags: ["bronze medal", "award", "third"] },
+      { id: "168", name: "铜牌", emoji: "\u{1F949}", unicode: "U+1F949", tags: ["bronze medal", "award", "third"] }
     ]
   },
   {
@@ -259,7 +259,7 @@ export const categories: Category[] = [
       { id: "189", name: "硬盘", emoji: "\u{1F4BE}", unicode: "U+1F4BE", tags: ["hard drive", "storage", "computer"] },
       { id: "190", name: "U盘", emoji: "\u{1F4BF}", unicode: "U+1F4BF", tags: ["usb", "flash drive", "storage"] },
       { id: "191", name: "耳机", emoji: "\u{1F3A7}", unicode: "U+1F3A7", tags: ["headphones", "music", "audio"] },
-      { id: "192", name: "麦克风", emoji: "\u{1F3A4}", unicode: "U+1F3A4", tags: ["microphone", "audio", "music"] },
+      { id: "192", name: "麦克风", emoji: "\u{1F3A4}", unicode: "U+1F3A4", tags: ["microphone", "audio", "music"] }
     ]
   },
   {
@@ -290,7 +290,7 @@ export const categories: Category[] = [
       { id: "213", name: "滑雪", emoji: "\u{26C8}", unicode: "U+26C8", tags: ["skiing", "sport", "snow"] },
       { id: "214", name: "冲浪", emoji: "\u{1F3C4}", unicode: "U+1F3C4", tags: ["surfing", "sport", "wave"] },
       { id: "215", name: "滑板", emoji: "\u{1F6F8}", unicode: "U+1F6F8", tags: ["skateboarding", "sport", "board"] },
-      { id: "216", name: "奖杯", emoji: "\u{1F3C6}", unicode: "U+1F3C6", tags: ["trophy", "sport", "win"] },
+      { id: "216", name: "奖杯", emoji: "\u{1F3C6}", unicode: "U+1F3C6", tags: ["trophy", "sport", "win"] }
     ]
   },
   {
@@ -321,7 +321,7 @@ export const categories: Category[] = [
       { id: "237", name: "叉", emoji: "\u{274C}", unicode: "U+274C", tags: ["cross", "wrong", "symbol"] },
       { id: "238", name: "加号", emoji: "\u{2795}", unicode: "U+2795", tags: ["plus", "add", "symbol"] },
       { id: "239", name: "减号", emoji: "\u{2796}", unicode: "U+2796", tags: ["minus", "subtract", "symbol"] },
-      { id: "240", name: "乘号", emoji: "\u{2715}", unicode: "U+2715", tags: ["multiply", "times", "symbol"] },
+      { id: "240", name: "乘号", emoji: "\u{2715}", unicode: "U+2715", tags: ["multiply", "times", "symbol"] }
     ]
   },
 ]
