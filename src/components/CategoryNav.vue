@@ -1,29 +1,29 @@
 <script setup lang="ts">
-import { inject, type Ref } from 'vue';
-import type { Category } from '../data/emojis';
+import { inject, type Ref } from 'vue'
+import type { Category } from '../data/emojis'
 
 interface SkinColorItem {
-  id: string;
-  name: string;
-  gradient: string;
+  id: string
+  name: string
+  gradient: string
 }
 
 defineProps<{
-  categories: Category[];
-  selectedCategory: string | null;
-  darkMode: boolean;
-}>();
+  categories: Category[]
+  selectedCategory: string | null
+  darkMode: boolean
+}>()
 
 const emit = defineEmits<{
-  select: [categoryId: string | null];
-}>();
+  select: [categoryId: string | null]
+}>()
 
-const skinColor = inject<Ref<string>>('skinColor')!;
-const skinColors = inject<SkinColorItem[]>('skinColors')!;
+const skinColor = inject<Ref<string>>('skinColor')!
+const skinColors = inject<SkinColorItem[]>('skinColors')!
 
 const handleSelect = (categoryId: string | null) => {
-  emit('select', categoryId);
-};
+  emit('select', categoryId)
+}
 </script>
 
 <template>

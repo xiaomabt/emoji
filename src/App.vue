@@ -1,41 +1,43 @@
-<script setup lang="ts">import { ref, computed, provide } from 'vue';
-import Header from './components/Header.vue';
-import SearchBar from './components/SearchBar.vue';
-import CategoryNav from './components/CategoryNav.vue';
-import EmojiGrid from './components/EmojiGrid.vue';
-import EmojiModal from './components/EmojiModal.vue';
-import CustomCursor from './components/CustomCursor.vue';
-import FavoritePanel from './components/FavoritePanel.vue';
-import LoginModal from './components/LoginModal.vue';
-import { categories, searchEmojis, type Emoji } from './data/emojis';
-const searchQuery = ref('');
-const selectedCategory = ref<string | null>(null);
-const selectedEmoji = ref<Emoji | null>(null);
-const showFavorites = ref(false);
+<script setup lang="ts">
+import { ref, computed, provide } from 'vue'
+import Header from './components/Header.vue'
+import SearchBar from './components/SearchBar.vue'
+import CategoryNav from './components/CategoryNav.vue'
+import EmojiGrid from './components/EmojiGrid.vue'
+import EmojiModal from './components/EmojiModal.vue'
+import CustomCursor from './components/CustomCursor.vue'
+import FavoritePanel from './components/FavoritePanel.vue'
+import LoginModal from './components/LoginModal.vue'
+import { categories, searchEmojis, type Emoji } from './data/emojis'
 
-const savedSkinColor = localStorage.getItem('emoji-skin-color');
-const skinColor = ref(savedSkinColor || 'indigo-purple');
+const searchQuery = ref('')
+const selectedCategory = ref<string | null>(null)
+const selectedEmoji = ref<Emoji | null>(null)
+const showFavorites = ref(false)
 
-const savedDarkMode = localStorage.getItem('emoji-dark-mode');
-const darkMode = ref(savedDarkMode === 'true');
+const savedSkinColor = localStorage.getItem('emoji-skin-color')
+const skinColor = ref(savedSkinColor || 'indigo-purple')
 
-const favorites = ref<string[]>([]);
+const savedDarkMode = localStorage.getItem('emoji-dark-mode')
+const darkMode = ref(savedDarkMode === 'true')
 
-const savedUser = localStorage.getItem('emoji-user');
-const currentUser = ref(savedUser ? JSON.parse(savedUser) : null);
-const showLoginModal = ref(false);
+const favorites = ref<string[]>([])
+
+const savedUser = localStorage.getItem('emoji-user')
+const currentUser = ref(savedUser ? JSON.parse(savedUser) : null)
+const showLoginModal = ref(false)
 
 const loadUserFavorites = () => {
   if (currentUser.value) {
-    const savedFavorites = localStorage.getItem(`emoji-favorites-${currentUser.value.id}`);
-    favorites.value = savedFavorites ? JSON.parse(savedFavorites) : [];
+    const savedFavorites = localStorage.getItem(`emoji-favorites-${currentUser.value.id}`)
+    favorites.value = savedFavorites ? JSON.parse(savedFavorites) : []
   } else {
-    favorites.value = [];
+    favorites.value = []
   }
-};
+}
 
 if (currentUser.value) {
-  loadUserFavorites();
+  loadUserFavorites()
 }
 
 const skinColors = [
@@ -45,64 +47,65 @@ const skinColors = [
  { id: 'emerald-teal', name: '翠绿', gradient: 'from-emerald-500 to-teal-500' },
  { id: 'orange-red', name: '橙红', gradient: 'from-orange-500 to-red-500' },
  { id: 'amber-yellow', name: '琥珀', gradient: 'from-amber-500 to-yellow-500' },
-];
-provide('skinColor', skinColor);
-provide('skinColors', skinColors);
-provide('darkMode', darkMode);
-provide('favorites', favorites);
+]
+
+provide('skinColor', skinColor)
+provide('skinColors', skinColors)
+provide('darkMode', darkMode)
+provide('favorites', favorites)
 
 interface User {
-  id: string;
-  username: string;
-  email: string;
-  avatar: string;
+  id: string
+  username: string
+  email: string
+  avatar: string
 }
 
 const handleLogin = (user: User) => {
-  currentUser.value = user;
-  localStorage.setItem('emoji-user', JSON.stringify(user));
-  showLoginModal.value = false;
-  loadUserFavorites();
-};
+  currentUser.value = user
+  localStorage.setItem('emoji-user', JSON.stringify(user))
+  showLoginModal.value = false
+  loadUserFavorites()
+}
 
 const handleLogout = () => {
-  currentUser.value = null;
-  favorites.value = [];
-  localStorage.removeItem('emoji-user');
-};
+  currentUser.value = null
+  favorites.value = []
+  localStorage.removeItem('emoji-user')
+}
 
 const toggleDarkMode = () => {
- darkMode.value = !darkMode.value;
- localStorage.setItem('emoji-dark-mode', darkMode.value.toString());
-};
+ darkMode.value = !darkMode.value
+ localStorage.setItem('emoji-dark-mode', darkMode.value.toString())
+}
 
 const toggleFavorite = (emojiId: string) => {
   if (!currentUser.value) {
-    showLoginModal.value = true;
-    return;
+    showLoginModal.value = true
+    return
   }
   
-  const index = favorites.value.indexOf(emojiId);
+  const index = favorites.value.indexOf(emojiId)
   if (index > -1) {
-    favorites.value.splice(index, 1);
+    favorites.value.splice(index, 1)
   } else {
-    favorites.value.push(emojiId);
+    favorites.value.push(emojiId)
   }
-  localStorage.setItem(`emoji-favorites-${currentUser.value.id}`, JSON.stringify(favorites.value));
-};
+  localStorage.setItem(`emoji-favorites-${currentUser.value.id}`, JSON.stringify(favorites.value))
+}
 
 const isFavorite = (emojiId: string) => {
- return favorites.value.includes(emojiId);
-};
+ return favorites.value.includes(emojiId)
+}
 
 const allEmojis = computed(() => {
- return categories.flatMap(c => c.emojis);
-});
+ return categories.flatMap(c => c.emojis)
+})
 
 const randomEmojis = computed(() => {
- const shuffled = [...allEmojis.value].sort(() => Math.random() - 0.5);
- return shuffled.slice(0, 12);
-});
+ const shuffled = [...allEmojis.value].sort(() => Math.random() - 0.5)
+ return shuffled.slice(0, 12)
+})
 
 const colorMap: Record<string, { primary: string; secondary: string }> = {
  'indigo-purple': { primary: '#6366f1', secondary: '#8b5cf6' },
@@ -111,35 +114,39 @@ const colorMap: Record<string, { primary: string; secondary: string }> = {
  'emerald-teal': { primary: '#10b981', secondary: '#14b8a6' },
  'orange-red': { primary: '#f97316', secondary: '#ef4444' },
  'amber-yellow': { primary: '#f59e0b', secondary: '#eab308' },
-};
+}
 
 const skinColorHex = computed(() => {
- return colorMap[skinColor.value]?.primary || '#6366f1';
-});
+ return colorMap[skinColor.value]?.primary || '#6366f1'
+})
 
 const skinColorSecondaryHex = computed(() => {
- return colorMap[skinColor.value]?.secondary || '#8b5cf6';
-});
+ return colorMap[skinColor.value]?.secondary || '#8b5cf6'
+})
 
 const filteredEmojis = computed(() => {
  const emojis = selectedCategory.value
  ? categories.find(c => c.id === selectedCategory.value)?.emojis || []
- : searchEmojis(searchQuery.value);
- return emojis;
-});
+ : searchEmojis(searchQuery.value)
+ return emojis
+})
+
 const handleCategoryChange = (categoryId: string | null) => {
- selectedCategory.value = categoryId;
-};
+ selectedCategory.value = categoryId
+}
+
 const handleSearch = (query: string) => {
- searchQuery.value = query;
- selectedCategory.value = null;
-};
+ searchQuery.value = query
+ selectedCategory.value = null
+}
+
 const handleEmojiClick = (emoji: Emoji) => {
- selectedEmoji.value = emoji;
-};
+ selectedEmoji.value = emoji
+}
+
 const handleCloseModal = () => {
- selectedEmoji.value = null;
-};
+ selectedEmoji.value = null
+}
 </script>
 
 <template>

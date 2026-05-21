@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue'
 
-const mouseX = ref(0);
-const mouseY = ref(0);
-const isHovering = ref(false);
-const particles = ref([]);
-let particleId = 0;
+const mouseX = ref(0)
+const mouseY = ref(0)
+const isHovering = ref(false)
+const particles = ref([])
+let particleId = 0
 
 const handleMouseMove = (e) => {
-  mouseX.value = e.clientX;
-  mouseY.value = e.clientY;
+  mouseX.value = e.clientX
+  mouseY.value = e.clientY
   
   if (Math.random() > 0.7) {
-    const id = particleId++;
+    const id = particleId++
     particles.value.push({
       id,
       x: e.clientX,
@@ -21,38 +21,38 @@ const handleMouseMove = (e) => {
       opacity: 1,
       vx: (Math.random() - 0.5) * 8,
       vy: (Math.random() - 0.5) * 8
-    });
+    })
     
     setTimeout(() => {
-      particles.value = particles.value.filter(p => p.id !== id);
-    }, 1000);
+      particles.value = particles.value.filter(p => p.id !== id)
+    }, 1000)
   }
-};
+}
 
 const handleMouseOver = (e) => {
-  const target = e.target;
+  const target = e.target
   if (target.tagName === 'BUTTON' || target.closest('button') || 
       target.tagName === 'A' || target.closest('a') ||
       target.getAttribute('role') === 'button') {
-    isHovering.value = true;
+    isHovering.value = true
   }
-};
+}
 
 const handleMouseOut = () => {
-  isHovering.value = false;
-};
+  isHovering.value = false
+}
 
 onMounted(() => {
-  window.addEventListener('mousemove', handleMouseMove);
-  window.addEventListener('mouseover', handleMouseOver);
-  window.addEventListener('mouseout', handleMouseOut);
-});
+  window.addEventListener('mousemove', handleMouseMove)
+  window.addEventListener('mouseover', handleMouseOver)
+  window.addEventListener('mouseout', handleMouseOut)
+})
 
 onUnmounted(() => {
-  window.removeEventListener('mousemove', handleMouseMove);
-  window.removeEventListener('mouseover', handleMouseOver);
-  window.removeEventListener('mouseout', handleMouseOut);
-});
+  window.removeEventListener('mousemove', handleMouseMove)
+  window.removeEventListener('mouseover', handleMouseOver)
+  window.removeEventListener('mouseout', handleMouseOut)
+})
 </script>
 
 <template>
