@@ -35,7 +35,7 @@ const copyFormats = [
   { id: 'emoji', name: 'Emoji', getValue: (e: Emoji) => e.emoji },
   { id: 'unicode', name: 'Unicode', getValue: (e: Emoji) => e.unicode },
   { id: 'html', name: 'HTML', getValue: (e: Emoji) => `&#x${e.unicode.replace('U+', '')};` },
-  { id: 'css', name: 'CSS', getValue: (e: Emoji) => `\\${e.unicode.replace('U+', '')}` },
+  { id: 'css', name: 'CSS', getValue: (e: Emoji) => `\\${e.unicode.replace('U+', '')}` }
 ]
 
 const handleCopy = () => {

@@ -46,7 +46,7 @@ const skinColors = [
  { id: 'cyan-blue', name: '青蓝', gradient: 'from-cyan-500 to-blue-500' },
  { id: 'emerald-teal', name: '翠绿', gradient: 'from-emerald-500 to-teal-500' },
  { id: 'orange-red', name: '橙红', gradient: 'from-orange-500 to-red-500' },
- { id: 'amber-yellow', name: '琥珀', gradient: 'from-amber-500 to-yellow-500' },
+ { id: 'amber-yellow', name: '琥珀', gradient: 'from-amber-500 to-yellow-500' }
 ]
 
 provide('skinColor', skinColor)
@@ -113,7 +113,7 @@ const colorMap: Record<string, { primary: string; secondary: string }> = {
  'cyan-blue': { primary: '#06b6d4', secondary: '#3b82f6' },
  'emerald-teal': { primary: '#10b981', secondary: '#14b8a6' },
  'orange-red': { primary: '#f97316', secondary: '#ef4444' },
- 'amber-yellow': { primary: '#f59e0b', secondary: '#eab308' },
+ 'amber-yellow': { primary: '#f59e0b', secondary: '#eab308' }
 }
 
 const skinColorHex = computed(() => {
